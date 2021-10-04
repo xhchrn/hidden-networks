@@ -67,7 +67,7 @@ class Bottleneck(nn.Module):
 
 
 class ResNet(nn.Module):
-    def __init__(self, builder, block, num_blocks):
+    def __init__(self, builder, block, num_blocks, num_classes=10):
         super(ResNet, self).__init__()
         self.in_planes = 64
         self.builder = builder
@@ -81,9 +81,9 @@ class ResNet(nn.Module):
         self.avgpool = nn.AdaptiveAvgPool2d(1)
 
         if args.last_layer_dense:
-            self.fc = nn.Conv2d(512 * block.expansion, 10, 1)
+            self.fc = nn.Conv2d(512 * block.expansion, num_classes, 1)
         else:
-            self.fc = builder.conv1x1(512 * block.expansion, 10)
+            self.fc = builder.conv1x1(512 * block.expansion, num_classes)
 
     def _make_layer(self, block, planes, num_blocks, stride):
         strides = [stride] + [1] * (num_blocks - 1)
@@ -108,6 +108,8 @@ class ResNet(nn.Module):
 def cResNet18():
     return ResNet(get_builder(), BasicBlock, [2, 2, 2, 2])
 
+def c100ResNet18():
+    return ResNet(get_builder(), BasicBlock, [2, 2, 2, 2], num_classes=100)
 
 def cResNet34():
     return ResNet(get_builder(), BasicBlock, [3, 4, 6, 3])
@@ -115,6 +117,9 @@ def cResNet34():
 
 def cResNet50():
     return ResNet(get_builder(), Bottleneck, [3, 4, 6, 3])
+
+def c100ResNet50():
+    return ResNet(get_builder(), Bottleneck, [3, 4, 6, 3], num_classes=100)
 
 
 def cResNet101():

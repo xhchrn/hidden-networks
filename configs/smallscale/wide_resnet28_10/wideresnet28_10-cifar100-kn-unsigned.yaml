@@ -1,5 +1,5 @@
 # Architecture
-arch: cWideResNet28_10
+arch: c100WideResNet28_10
 
 # ===== Dataset ===== #
 data: datasets

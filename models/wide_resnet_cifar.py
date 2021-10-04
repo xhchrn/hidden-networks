@@ -34,7 +34,7 @@ class wide_basic(nn.Module):
         return out
 
 class Wide_ResNet(nn.Module):
-    def __init__(self, builder, depth, widen_factor, dropout_rate=0, num_classes=10, init_method='standard'):
+    def __init__(self, builder, depth, widen_factor, dropout_rate=0, num_classes=10):
         super(Wide_ResNet, self).__init__()
         self.in_planes = 16
 
@@ -50,7 +50,7 @@ class Wide_ResNet(nn.Module):
         self.layer2 = self._wide_layer(builder, wide_basic, nStages[2], n, dropout_rate, stride=2)
         self.layer3 = self._wide_layer(builder, wide_basic, nStages[3], n, dropout_rate, stride=2)
         self.bn1 = builder.batchnorm(nStages[3])
-        self.linear = builder.conv1x1(nStages[3], 10)
+        self.linear = builder.conv1x1(nStages[3], num_classes)
 
     def _wide_layer(self, builder, block, planes, num_blocks, dropout_rate, stride):
         strides = [stride] + [1]*(int(num_blocks)-1)

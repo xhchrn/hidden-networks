@@ -9,7 +9,7 @@ name: baseline
 # ===== Learning Rate Policy ======== #
 optimizer: sgd
 lr: 0.1
-lr_policy: milestones
+lr_policy: milestone_lr
 miestones: "80,120"
 
 # ===== Network training config ===== #

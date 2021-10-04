@@ -168,7 +168,7 @@ def main_worker(args):
             )
 
             if epoch == args.epochs - 1:
-                print(f"==> Best Top-1 acc {best_acc1}")
+                print(f"==> Best Top-1 acc {best_acc1}")    
 
         epoch_time.update((time.time() - end_epoch) / 60)
         progress_overall.display(epoch)

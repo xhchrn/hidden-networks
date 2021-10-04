@@ -2,20 +2,21 @@
 arch: cResNet18 
 
 # ===== Dataset ===== #
-data: /mnt/disk1/datasets
+data: datasets
 set: CIFAR10
 name: baseline
 
 # ===== Learning Rate Policy ======== #
 optimizer: sgd
 lr: 0.1
-lr_policy: cosine_lr
+lr_policy: milestones
+miestones: "80,120"
 
 # ===== Network training config ===== #
-epochs: 100
+epochs: 200
 weight_decay: 0.0005
 momentum: 0.9
-batch_size: 256
+batch_size: 128
 
 # ===== Sparsity =========== #
 conv_type: SubnetConv

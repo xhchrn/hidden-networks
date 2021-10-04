@@ -132,6 +132,12 @@ def parse_arguments():
         "--multistep-lr-gamma", default=0.1, type=int, help="Multistep multiplier"
     )
     parser.add_argument(
+        "--milestones", default='80,120', type=str, help="Interval to drop lr"
+    )
+    parser.add_argument(
+        "--lr-gamma", default=0.1, type=int, help="Multistep multiplier"
+    )
+    parser.add_argument(
         "--name", default=None, type=str, help="Experiment name to append to filepath"
     )
     parser.add_argument(

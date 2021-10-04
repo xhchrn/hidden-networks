@@ -1,6 +1,6 @@
 import numpy as np
 
-__all__ = ["multistep_lr", "cosine_lr", "constant_lr", "get_policy"]
+__all__ = ["multistep_lr", "cosine_lr", "constant_lr", "get_policy", "milestone_lr"]
 
 
 def get_policy(name):
@@ -66,3 +66,24 @@ def multistep_lr(optimizer, args, **kwargs):
 
 def _warmup_lr(base_lr, warmup_length, epoch):
     return base_lr * (epoch + 1) / warmup_length
+
+
+def milestone_lr(optimizer, args, **kwargs):
+    """Sets the learning rate to the initial LR decayed by 10 after reaching every milestone"""
+
+    def _lr_adjuster(epoch, iteration):
+        milestones = list(map(int, args.milestones.split(',')))
+        num_milestones_reached = 0
+        for ms in milestones:
+            if (iteration + 1) >= ms:
+                num_milestones_reached += 1
+            else:
+                break
+
+        lr = args.lr * (args.lr_gamma ** num_milestones_reached)
+
+        assign_learning_rate(optimizer, lr)
+
+        return lr
+
+    return _lr_adjuster

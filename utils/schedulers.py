@@ -11,6 +11,7 @@ def get_policy(name):
         "constant_lr": constant_lr,
         "cosine_lr": cosine_lr,
         "multistep_lr": multistep_lr,
+        "milestone_lr": milestone_lr,
     }
 
     return out_dict[name]

@@ -147,7 +147,7 @@ def main_worker(args):
         save = ((epoch % args.save_every) == 0) and args.save_every > 0
         if is_best or save or epoch == args.epochs - 1:
             if is_best:
-                print(f"==> New best, saving at {ckpt_base_dir / 'model_best.pth'}")
+                print(f"==> New best Top-1 acc {best_acc1}, saving at {ckpt_base_dir / 'model_best.pth'}")
 
             save_checkpoint(
                 {
@@ -166,6 +166,9 @@ def main_worker(args):
                 filename=ckpt_base_dir / f"epoch_{epoch}.state",
                 save=save,
             )
+
+            if epoch == args.epochs - 1:
+                print(f"==> Best Top-1 acc {best_acc1}")
 
         epoch_time.update((time.time() - end_epoch) / 60)
         progress_overall.display(epoch)

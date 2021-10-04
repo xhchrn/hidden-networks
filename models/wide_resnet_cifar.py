@@ -69,10 +69,10 @@ class Wide_ResNet(nn.Module):
         out = self.layer3(out)
         out = F.relu(self.bn1(out))
         out = F.avg_pool2d(out, 8)
-        out = out.view(out.size(0), -1)
+        # out = out.view(out.size(0), -1)
         out = self.linear(out)
 
-        return out
+        return out.flatten(1)
 
 def cWideResNet28_10():
     return Wide_ResNet(get_builder(), 28, 10, dropout_rate=0, num_classes=10)

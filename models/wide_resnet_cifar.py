@@ -75,7 +75,7 @@ class Wide_ResNet(nn.Module):
         return out
 
 def cWideResNet28_10():
-    return Wide_ResNet(28, 10, dropout_rate=0, num_classes=10)
+    return Wide_ResNet(get_builder(), 28, 10, dropout_rate=0, num_classes=10)
 
 def c100WideResNet28_10():
-    return Wide_ResNet(28, 10, dropout_rate=0, num_classes=100)
+    return Wide_ResNet(get_builder(), 28, 10, dropout_rate=0, num_classes=100)

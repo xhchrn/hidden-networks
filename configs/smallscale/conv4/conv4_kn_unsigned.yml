@@ -2,18 +2,19 @@
 arch: Conv4
 
 # ===== Dataset ===== #
-data: /mnt
+data: datasets
 set: CIFAR10
 name: conv4_kn_unsigned
 
 # ===== Learning Rate Policy ======== #
 optimizer: sgd
 lr: 0.1
-lr_policy: cosine_lr
+lr_policy: milestone_lr
+miestones: "80,120"
 
 # ===== Network training config ===== #
-epochs: 100
-weight_decay: 0.0001
+epochs: 200
+weight_decay: 0.0005
 momentum: 0.9
 batch_size: 128
 

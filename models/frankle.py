@@ -40,21 +40,27 @@ class Conv4(nn.Module):
         builder = get_builder()
         self.convs = nn.Sequential(
             builder.conv3x3(3, 64, first_layer=True),
+            builder.batchnorm(64),
             nn.ReLU(),
             builder.conv3x3(64, 64),
+            builder.batchnorm(64),
             nn.ReLU(),
             nn.MaxPool2d((2, 2)),
             builder.conv3x3(64, 128),
+            builder.batchnorm(128),
             nn.ReLU(),
             builder.conv3x3(128, 128),
+            builder.batchnorm(128),
             nn.ReLU(),
             nn.MaxPool2d((2, 2))
         )
 
         self.linear = nn.Sequential(
             builder.conv1x1(32 * 32 * 8, 256),
+            builder.batchnorm(256),
             nn.ReLU(),
             builder.conv1x1(256, 256),
+            builder.batchnorm(256),
             nn.ReLU(),
             builder.conv1x1(256, 10),
         )
@@ -72,26 +78,34 @@ class Conv6(nn.Module):
         builder = get_builder()
         self.convs = nn.Sequential(
             builder.conv3x3(3, 64, first_layer=True),
+            builder.batchnorm(64),
             nn.ReLU(),
             builder.conv3x3(64, 64),
+            builder.batchnorm(64),
             nn.ReLU(),
             nn.MaxPool2d((2, 2)),
             builder.conv3x3(64, 128),
+            builder.batchnorm(128),
             nn.ReLU(),
             builder.conv3x3(128, 128),
+            builder.batchnorm(128),
             nn.ReLU(),
             nn.MaxPool2d((2, 2)),
             builder.conv3x3(128, 256),
+            builder.batchnorm(256),
             nn.ReLU(),
             builder.conv3x3(256, 256),
+            builder.batchnorm(256),
             nn.ReLU(),
             nn.MaxPool2d((2, 2))
         )
 
         self.linear = nn.Sequential(
             builder.conv1x1(256 * 4 * 4, 256),
+            builder.batchnorm(256),
             nn.ReLU(),
             builder.conv1x1(256, 256),
+            builder.batchnorm(256),
             nn.ReLU(),
             builder.conv1x1(256, 10),
         )
